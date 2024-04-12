@@ -1,13 +1,15 @@
 import React from 'react';
 import { View, Button } from 'react-native';
+import {  } from "../add/options/AddKcal";
 
 const App = ({navigation}) => {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      
       <Button
         title="Ir para a página 1"
-        onPress={() => navigation.navigate('Page1')}
+        onPress={() => navigation.navigate('AddKcal')}
       />
       <Button
         title="Ir para a página 2"

@@ -55,22 +55,49 @@ export default function Logout({ navigation }: { navigation: any }) {
     getData();
   }, []);
   return (
-    <View style={styles.container}>
+    <View style={styles.tela}>
       {/* <Text style={{ fontSize: 25 }}>aqui{userName}</Text> */}
       <Text style={{ fontSize: 25 }}>{email}</Text>
       <Text style={{ fontSize: 25 }}>Olá!</Text>
+      
       <View>
         <TouchableOpacity style={styles.button} onPress={handleSignout}>
           <Text style={{ color: Colors.white, fontSize: 20 }}>Sair</Text>
         </TouchableOpacity>
       </View>
+
+      <View  style={styles.container}>
+        
+          <Text style={styles.conta}>Dados Pessoais</Text>
+          
+          <Text style={styles.conquistas}>Conquistas</Text>
+
+          <Text style={styles.progresso}>Progresso</Text>
+
+          <Text style={styles.meta}>Meta de Injestão</Text>
+
+      </View>
+
+
+      <View>
+        <TouchableOpacity style={styles.button} onPress={handleSignout}>
+          <Text style={{ color: Colors.white, fontSize: 20 }}>Sair</Text>
+        </TouchableOpacity>
+      </View>
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "white",
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  tela: {
+    backgroundColor: "F7F8F8",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -84,4 +111,30 @@ const styles = StyleSheet.create({
     width: 200,
     marginTop: 50,
   },
+
+  conta: {
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  conquistas: {
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  progresso: {
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  
+  meta: {
+    
+    justifyContent: "center",
+    alignItems: "center",
+    color: "grey",
+  },
+
 });

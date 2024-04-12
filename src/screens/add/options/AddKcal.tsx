@@ -60,6 +60,7 @@ return (
   }
 }} />
 
+
       </View>
       <View style={styles.suggestionsTop}>
         {suggestions.length > 0 && (
