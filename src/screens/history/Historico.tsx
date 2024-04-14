@@ -7,7 +7,7 @@ export default function Historico() {
     <View style={{ flex: 1}}>
       <Header/>
     <View style={styles.container}>
-      <Text style= {styles.title}>Historico conteudo</Text>
+      <Text style= {styles.title}>Historico teste</Text>
     </View>
     </View>
   );
