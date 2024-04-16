@@ -35,7 +35,7 @@ export default function TabsRoutes() {
             />
             <Tab.Screen
                 name='Add'
-                component={AddWater} 
+                component={AddKcal} 
                 options={{
                     tabBarLabel: '',
                     tabBarIcon: ({ color, size }) => (<ButtonAdd size={size} color={color} />),
@@ -44,7 +44,7 @@ export default function TabsRoutes() {
             />
             <Tab.Screen
                 name='historico'
-                component={AddWater}
+                component={Historico}
                 options={{
                     tabBarIcon: ({ color, size }) => <FontAwesome6 name="clock-rotate-left" size={24} color={color} />,
                     tabBarLabel: ''
