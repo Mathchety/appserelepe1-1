@@ -9,6 +9,7 @@
     {"nome": "Frango", "porcao": "100g", "valorkcal": 165},
     {"nome": "Peixe", "porcao": "100g", "valorkcal": 206},
     {"nome": "Carne bovina", "porcao": "100g", "valorkcal": 250},
+    {"nome": "Carne bovina pequena", "porcao": "50g", "valorkcal": 250},
     {"nome": "Ovo", "porcao": "1 grande", "valorkcal": 78},
     {"nome": "Leite", "porcao": "1 xícara", "valorkcal": 103},
     {"nome": "Queijo", "porcao": "1 fatia", "valorkcal": 113},
@@ -18,6 +19,7 @@
     {"nome": "Cenoura", "porcao": "1 média", "valorkcal": 25},
     {"nome": "Brócolis", "porcao": "1 xícara", "valorkcal": 55},
     {"nome": "Espinafre", "porcao": "1 xícara", "valorkcal": 7},
-    {"nome": "Alface", "porcao": "1 xícara", "valorkcal": 5}
+    {"nome": "Alface", "porcao": "1 xícara", "valorkcal": 5},
+    {"nome": "Alface fresco", "porcao": "1 xícara", "valorkcal": 5}
   ]
   
