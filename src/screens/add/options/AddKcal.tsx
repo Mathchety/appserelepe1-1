@@ -1,29 +1,27 @@
-{/* <TODO>Toda logica de adicionar e procurar no json esta nessa pagina</TODO>
- */}import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { HistoryContext } from '../../../Context/HistoryContext';
 import alimentos from '../../../data/alimentos.json';
 
-const AddKcal = () => {
-  const [inputText, setInputText] = useState('');
-  const [history, setHistory] = useState([]);
-  const [suggestions, setSuggestions] = useState(alimentos.slice(0, 10));
+type HistoryContextData = {
+  history: any[];
+  addToHistory: (item: any) => void;
+};
 
-  const handleAddToHistory = (item) => {
-    setHistory(currentHistory => {
-      const newHistory = [...currentHistory, item];
-      const sum = newHistory.reduce((total, { valorkcal }) => total + valorkcal, 0);
-      setTotalKcal(sum);
-      return newHistory;
-    });
-    setInputText('');
+const AddKcal: React.FC = () => {
+  const { history, addToHistory } = useContext<HistoryContextData>(HistoryContext);
+
+  const [inputText, setInputText] = React.useState('');
+  const [suggestions, setSuggestions] = React.useState<any[]>(alimentos.slice(0, 10));
+
+  const handleAddToHistory = (item: any) => {
+    addToHistory(item);
   };
-  
+
   function removeDiacritics(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }
-  
-  // Adicione este estado para armazenar a soma total de kcal
-  const [totalKcal, setTotalKcal] = useState(0);
+
   const handleInputChange = text => {
     setInputText(text);
     if (text === '') {
@@ -38,13 +36,14 @@ const AddKcal = () => {
     }
   };
 
-return (
+
+  return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
       <View >
-      <Text>Total de kcal: {totalKcal} Kcal</Text>
+        <Text>Total de kcal: {history.reduce((total, { valorkcal }) => total + valorkcal, 0)} Kcal</Text>
         <TextInput
           style={styles.input}
           value={inputText}
@@ -54,13 +53,12 @@ return (
           autoCapitalize="none"
         />
         <Button title="Add to history" onPress={() => {
-  const selectedItem = alimentos.find(alimento => removeDiacritics(alimento.nome.toLowerCase()) === removeDiacritics(inputText.toLowerCase()));
-  if (selectedItem) {
-    handleAddToHistory(selectedItem);
-  }
-}} />
-
-
+          const selectedItem = alimentos.find(alimento => removeDiacritics(alimento.nome.toLowerCase()) === removeDiacritics(inputText.toLowerCase()));
+          if (selectedItem) {
+            addToHistory(selectedItem);
+            setInputText('');
+          }
+        }} />
       </View>
       <View style={styles.suggestionsTop}>
         {suggestions.length > 0 && (
@@ -85,11 +83,7 @@ return (
           ))}
         </View>
       </ScrollView>
-     {/*  <View style={styles.totalKcal}>
-        <Text>Total de kcal: {totalKcal} Kcal</Text>
-      </View> */}
     </KeyboardAvoidingView>
-
   );
 };
 
@@ -127,7 +121,6 @@ const styles = StyleSheet.create({
   },
   suggestionsTop: {
     width: '90%',
-    backgroundColor: 'green',
   },
   suggestionItem: {
     width: '100%',
