@@ -1,25 +1,407 @@
-[
-    {"nome": "Maçã", "porcao": "1 média", "valorkcal": 95},
-    {"nome": "Banana", "porcao": "1 média", "valorkcal": 105},
-    {"nome": "Laranja", "porcao": "1 média", "valorkcal": 62},
-    {"nome": "Morango", "porcao": "1 xícara", "valorkcal": 49},
-    {"nome": "Abacate", "porcao": "1/4 médio", "valorkcal": 80},
-    {"nome": "Arroz", "porcao": "1 xícara", "valorkcal": 205},
-    {"nome": "Feijão", "porcao": "1 xícara", "valorkcal": 239},
-    {"nome": "Frango", "porcao": "100g", "valorkcal": 165},
-    {"nome": "Peixe", "porcao": "100g", "valorkcal": 206},
-    {"nome": "Carne bovina", "porcao": "100g", "valorkcal": 250},
-    {"nome": "Carne bovina pequena", "porcao": "50g", "valorkcal": 250},
-    {"nome": "Ovo", "porcao": "1 grande", "valorkcal": 78},
-    {"nome": "Leite", "porcao": "1 xícara", "valorkcal": 103},
-    {"nome": "Queijo", "porcao": "1 fatia", "valorkcal": 113},
-    {"nome": "Pão", "porcao": "1 fatia", "valorkcal": 79},
-    {"nome": "Batata", "porcao": "1 média", "valorkcal": 130},
-    {"nome": "Tomate", "porcao": "1 médio", "valorkcal": 22},
-    {"nome": "Cenoura", "porcao": "1 média", "valorkcal": 25},
-    {"nome": "Brócolis", "porcao": "1 xícara", "valorkcal": 55},
-    {"nome": "Espinafre", "porcao": "1 xícara", "valorkcal": 7},
-    {"nome": "Alface", "porcao": "1 xícara", "valorkcal": 5},
-    {"nome": "Alface fresco", "porcao": "1 xícara", "valorkcal": 5}
-  ]
-  
+ [
+  {
+    "nome": "Maçã",
+    "porcao": "1 média",
+    "valorkcal": 95
+  },
+  {
+    "nome": "Banana",
+    "porcao": "1 média",
+    "valorkcal": 105
+  },
+  {
+    "nome": "Laranja",
+    "porcao": "1 média",
+    "valorkcal": 62
+  },
+  {
+    "nome": "Morango",
+    "porcao": "1 xícara",
+    "valorkcal": 49
+  },
+  {
+    "nome": "Abacate",
+    "porcao": "1/4 médio",
+    "valorkcal": 80
+  },
+  {
+    "nome": "Arroz",
+    "porcao": "1 xícara",
+    "valorkcal": 205
+  },
+  {
+    "nome": "Feijão",
+    "porcao": "1 xícara",
+    "valorkcal": 239
+  },
+  {
+    "nome": "Frango",
+    "porcao": "100g",
+    "valorkcal": 165
+  },
+  {
+    "nome": "Peixe",
+    "porcao": "100g",
+    "valorkcal": 206
+  },
+  {
+    "nome": "Carne bovina",
+    "porcao": "100g",
+    "valorkcal": 250
+  },
+  {
+    "nome": "Carne bovina pequena",
+    "porcao": "50g",
+    "valorkcal": 250
+  },
+  {
+    "nome": "Ovo",
+    "porcao": "1 grande",
+    "valorkcal": 78
+  },
+  {
+    "nome": "Leite",
+    "porcao": "1 xícara",
+    "valorkcal": 103
+  },
+  {
+    "nome": "Queijo",
+    "porcao": "1 fatia",
+    "valorkcal": 113
+  },
+  {
+    "nome": "Pão",
+    "porcao": "1 fatia",
+    "valorkcal": 79
+  },
+  {
+    "nome": "Batata",
+    "porcao": "1 média",
+    "valorkcal": 130
+  },
+  {
+    "nome": "Tomate",
+    "porcao": "1 médio",
+    "valorkcal": 22
+  },
+  {
+    "nome": "Cenoura",
+    "porcao": "1 média",
+    "valorkcal": 25
+  },
+  {
+    "nome": "Brócolis",
+    "porcao": "1 xícara",
+    "valorkcal": 55
+  },
+  {
+    "nome": "Espinafre",
+    "porcao": "1 xícara",
+    "valorkcal": 7
+  },
+  {
+    "nome": "Alface",
+    "porcao": "1 xícara",
+    "valorkcal": 5
+  },
+  {
+    "nome": "Alface fresco",
+    "porcao": "1 xícara",
+    "valorkcal": 5
+  },
+  {
+    "nome": "Lasanha",
+    "porcao": "150g",
+    "valorkcal": 350
+  },
+  {
+    "nome": "Pizza",
+    "porcao": "1 fatia",
+    "valorkcal": 280
+  },
+  {
+    "nome": "Hambúrguer",
+    "porcao": "1 unidade",
+    "valorkcal": 450
+  },
+  {
+    "nome": "Sushi",
+    "porcao": "8 peças",
+    "valorkcal": 250
+  },
+  {
+    "nome": "Tacos",
+    "porcao": "2 unidades",
+    "valorkcal": 300
+  },
+  {
+    "nome": "Macarrão",
+    "porcao": "150g",
+    "valorkcal": 250
+  },
+  {
+    "nome": "Frango assado",
+    "porcao": "150g",
+    "valorkcal": 300
+  },
+  {
+    "nome": "Salmão grelhado",
+    "porcao": "150g",
+    "valorkcal": 250
+  },
+  {
+    "nome": "Bife",
+    "porcao": "150g",
+    "valorkcal": 400
+  },
+  {
+    "nome": "Batata frita",
+    "porcao": "150g",
+    "valorkcal": 400
+  },
+  {
+    "nome": "Coca-cola",
+    "porcao": "1 lata",
+    "valorkcal": 140
+  },
+  {
+    "nome": "Suco de laranja",
+    "porcao": "1 copo",
+    "valorkcal": 120
+  },
+  {
+    "nome": "Suco de uva",
+    "porcao": "1 copo",
+    "valorkcal": 150
+  },
+  {
+    "nome": "Suco de abacaxi",
+    "porcao": "1 copo",
+    "valorkcal": 120
+  },
+  {
+    "nome": "Suco de maçã",
+    "porcao": "1 copo",
+    "valorkcal": 120
+  },
+  {
+    "nome": "Suco de morango",
+    "porcao": "1 copo",
+    "valorkcal": 120
+  },
+  {
+    "nome": "Suco de maracujá",
+    "porcao": "1 copo",
+    "valorkcal": 120
+  },
+  {
+    "nome": "Suco de manga",
+    "porcao": "1 copo",
+    "valorkcal": 120
+  },
+  {
+    "nome": "Suco de melancia",
+    "porcao": "1 copo",
+    "valorkcal": 120
+  },
+  {
+    "nome": "Suco de melão",
+    "porcao": "1 copo",
+    "valorkcal": 120
+  },
+  {
+    "nome": "Suco de mamão",
+    "porcao": "1 copo",
+    "valorkcal": 120
+  },
+  {
+    "nome": "Suco de limão",
+    "porcao": "1 copo",
+    "valorkcal": 120
+  },
+  {
+    "nome": "Suco de kiwi",
+    "porcao": "1 copo",
+    "valorkcal": 120
+  },
+  {
+    "nome": "Suco de goiaba",
+    "porcao": "1 copo",
+    "valorkcal": 120
+  },
+  {
+    "nome": "Pêssego",
+    "porcao": "150g",
+    "valorkcal": 60
+  },
+  {
+    "nome": "Mirtilo",
+    "porcao": "150g",
+    "valorkcal": 55
+  },
+  {
+    "nome": "Uva",
+    "porcao": "150g",
+    "valorkcal": 70
+  },
+  {
+    "nome": "Queijo",
+    "porcao": "30g",
+    "valorkcal": 120
+  },
+  {
+    "nome": "Fiambre",
+    "porcao": "50g",
+    "valorkcal": 150
+  },
+  {
+    "nome": "Carne de porco",
+    "porcao": "100g",
+    "valorkcal": 200
+  },
+  {
+    "nome": "Carne de vaca",
+    "porcao": "100g",
+    "valorkcal": 180
+  },
+  {
+    "nome": "Carne de frango",
+    "porcao": "150g",
+    "valorkcal": 140
+  },
+  {
+    "nome": "Peixe",
+    "porcao": "150g",
+    "valorkcal": 200
+  },
+  {
+    "nome": "Ovo",
+    "porcao": "50g",
+    "valorkcal": 70
+  },
+  {
+    "nome": "Manteiga",
+    "porcao": "14g",
+    "valorkcal": 100
+  },
+  {
+    "nome": "Azeite",
+    "porcao": "14g",
+    "valorkcal": 120
+  },
+  {
+    "nome": "Abacate",
+    "porcao": "150g",
+    "valorkcal": 120
+  },
+  {
+    "nome": "Suco de laranja",
+    "porcao": "240ml",
+    "valorkcal": 110
+  },
+  {
+    "nome": "Suco de limão",
+    "porcao": "240ml",
+    "valorkcal": 40
+  },
+  {
+    "nome": "Suco de uva",
+    "porcao": "240ml",
+    "valorkcal": 150
+  },
+  {
+    "nome": "Água",
+    "porcao": "240ml",
+    "valorkcal": 0
+  },
+  {
+    "nome": "Café",
+    "porcao": "240ml",
+    "valorkcal": 0
+  },
+  {
+    "nome": "Chá",
+    "porcao": "240ml",
+    "valorkcal": 0
+  },
+  {
+    "nome": "Refrigerante",
+    "porcao": "355ml",
+    "valorkcal": 150
+  },
+  {
+    "nome": "Suco enriquecido",
+    "porcao": "240ml",
+    "valorkcal": 100
+  },
+  {
+    "nome": "Cereja",
+    "porcao": "150g",
+    "valorkcal": 80
+  },
+  {
+    "nome": "Framboesa",
+    "porcao": "150g",
+    "valorkcal": 60
+  },
+  {
+    "nome": "Mirtilo",
+    "porcao": "150g",
+    "valorkcal": 55
+  },
+  {
+    "nome": "Uva",
+    "porcao": "150g",
+    "valorkcal": 70
+  },
+  {
+    "nome": "Passas",
+    "porcao": "150g",
+    "valorkcal": 240
+  },
+  {
+    "nome": "Noz",
+    "porcao": "150g",
+    "valorkcal": 600
+  },
+  {
+    "nome": "Amêndoa",
+    "porcao": "150g",
+    "valorkcal": 550
+  },
+  {
+    "nome": "Macarrão com molho de tomate",
+    "porcao": "150g",
+    "valorkcal": 300
+  },
+  {
+    "nome": "Bife com batatas fritas",
+    "porcao": "150g",
+    "valorkcal": 500
+  },
+  {
+    "nome": "Frango assado com arroz",
+    "porcao": "150g",
+    "valorkcal": 400
+  },
+  {
+    "nome": "Peixe grelhado com salada",
+    "porcao": "150g",
+    "valorkcal": 350
+  },
+  {
+    "nome": "Panqueca com doce de leite",
+    "porcao": "1 unidade",
+    "valorkcal": 350
+  },
+  {
+    "nome": "Torta de maçã",
+    "porcao": "1 fatia",
+    "valorkcal": 250
+  },
+  {
+    "nome": "Sorvete de chocolate",
+    "porcao": "1 bolinha",
+    "valorkcal": 150
+  }
+]
