@@ -5,7 +5,6 @@ import { FontAwesome6 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { HistoryProvider } from '../Context/HistoryContext';
-
 import Home from '../screens/home/Home';
 import Metas from '../screens/meta/Metas';
 import Historico from '../screens/history/Historico';
@@ -14,6 +13,7 @@ import AddKcal from '../screens/add/options/AddKcal';
 import AddWater from '../screens/add/options/AddAgua';
 import Logout from '../screens/login/Logout';
 import Add from "../screens/add/Add";
+
 const Tab = createBottomTabNavigator();
 
 export default function TabsRoutes() {
@@ -38,7 +38,7 @@ export default function TabsRoutes() {
           />
           <Tab.Screen
             name='Add'
-            component={AddKcal}
+            component={Add}
             options={{
               tabBarLabel: '',
               tabBarIcon: ({ color, size }) => (<ButtonAdd size={size} color={color} />),

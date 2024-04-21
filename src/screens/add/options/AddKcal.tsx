@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView, Platform, ScrollView, TouchableOpacity } from 'react-native';
 import { HistoryContext } from '../../../Context/HistoryContext';
 import alimentos from '../../../data/alimentos.json';
+import Header from '../../../components/HeaderAddkcal';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 type HistoryContextData = {
   history: any[];
   addToHistory: (item: any) => void;
 };
-
 const AddKcal: React.FC = () => {
   const { history, addToHistory } = useContext<HistoryContextData>(HistoryContext);
 
@@ -42,106 +44,126 @@ const AddKcal: React.FC = () => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
-      <View >
-        <Text>Total de kcal: {history.reduce((total, { valorkcal }) => total + valorkcal, 0)} Kcal</Text>
-        <TextInput
-          style={styles.input}
-          value={inputText}
-          onChangeText={handleInputChange}
-          placeholder="Digite o nome do alimento"
-          autoCorrect={false}
-          autoCapitalize="none"
-        />
-        <Button title="Add to history" onPress={() => {
-          const selectedItem = alimentos.find(alimento => removeDiacritics(alimento.nome.toLowerCase()) === removeDiacritics(inputText.toLowerCase()));
-          if (selectedItem) {
-            addToHistory(selectedItem);
-            setInputText('');
-          }
-        }} />
-      </View>
-      <View style={styles.suggestionsTop}>
-        {suggestions.length > 0 && (
-          <View style={styles.suggestionsContainer}>
-            {suggestions.map((suggestion, index) => (
-              <View key={index} style={styles.suggestionItem}>
-                <Text onPress={() => setInputText(suggestion.nome)}>
-                  {suggestion.nome} - {suggestion.porcao} - {suggestion.valorkcal} Kcal
-                </Text>
-                <Button title="+" onPress={() => handleAddToHistory(suggestion)} />
-              </View>
-            ))}
-          </View>
-        )}
-      </View>
-      <ScrollView style={styles.historyScrollView}>
-        <View style={styles.historyContainer}>
-          {history.map((item, index) => (
-            <Text key={index} style={styles.historyItem}>
-              {item.nome} - {item.porcao} - {item.valorkcal} kcal
-            </Text>
-          ))}
+      <SafeAreaView>
+        <View style={styles.header}>
+          <Header />
         </View>
-      </ScrollView>
+        <View style={styles.containerTop}>
+          <Text style={styles.totalKcal}>Total de kcal: {history.reduce((total, { valorkcal }) => total + valorkcal, 0)} Kcal</Text>
+          <TextInput
+            style={styles.input}
+            value={inputText}
+            onChangeText={handleInputChange}
+            placeholder="Digite o nome do alimento"
+            autoCorrect={false}
+            autoCapitalize="none"
+          />
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              const selectedItem = alimentos.find(alimento => removeDiacritics(alimento.nome.toLowerCase()) === removeDiacritics(inputText.toLowerCase()));
+              if (selectedItem) {
+                addToHistory(selectedItem);
+                setInputText('');
+              }
+            }}>
+            <Text>Add to history</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.suggestionsTop}>
+          {suggestions.length > 0 && (
+            <View style={styles.suggestionsContainer}>
+              {suggestions.map((suggestion, index) => (
+                <View key={index} style={styles.suggestionItem}>
+                  <Text onPress={() => setInputText(suggestion.nome)}>
+                    <Text>{suggestion.nome} - </Text>
+                    <Text>{suggestion.porcao} - </Text>
+                    <Text>{suggestion.valorkcal} kcal</Text>
+                  </Text>
+                  <Button title="+" onPress={() => handleAddToHistory(suggestion)} />
+                </View>
+              ))}
+            </View>
+          )}
+        </View>
+        <ScrollView style={styles.historyScrollView}>
+          <View style={styles.historyContainer}>
+            {history
+              .slice()
+              .reverse()
+              .map((item, index) => (
+                <View key={index} style={styles.historyItem}>
+                  <Text>{item.nome}</Text>
+                  <Text>{item.porcao}</Text>
+                  <Text>{item.valorkcal} kcal</Text>
+                </View>
+              ))}
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#80ed99',
     alignItems: 'center',
-    justifyContent: 'flex-start',
-
+    justifyContent: 'center',
+  },
+  header: {
+    backgroundColor: '#fff',
+    width: '100%'
   },
   containerTop: {
-    paddingTop: 50,
-    flex: 1,
-    height: 60,
-    backgroundColor: 'blue',
     alignItems: 'center',
     justifyContent: 'flex-start',
-
   },
   suggestionsContainer: {
     width: '100%',
     marginTop: 10,
     backgroundColor: '#fff',
+    borderRadius: 8,
   },
   input: {
-    height: 30,
+    height: 40,
     minWidth: '90%',
     borderColor: 'gray',
     borderWidth: 1,
     width: '80%',
     marginBottom: 10,
     borderRadius: 10,
+    textAlign: 'center',
   },
   suggestionsTop: {
-    width: '90%',
+    width: '100%',
   },
   suggestionItem: {
-    width: '100%',
+    width: '95%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 5,
+    alignItems: 'center',
+    padding: 2,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   historyScrollView: {
-    flex: 2,
-    width: '90%',
-    marginTop: 20,
+    width: '100%',
+    marginTop: 10,
     padding: 5,
-    backgroundColor: 'red',
+    backgroundColor: '#ffffeb',
   },
   historyContainer: {
-    width: '90%',
-    marginTop: 20,
+    width: '100%',
     padding: 5,
   },
   historyItem: {
-    marginBottom: 5,
+    flex:1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '95%',
+    backgroundColor: 'red',
   },
   totalKcal: {
     fontSize: 18,
@@ -149,6 +171,17 @@ const styles = StyleSheet.create({
     color: 'green',
     marginTop: 10,
     marginBottom: 10,
+  },
+  button: {
+    width: '90%',
+    alignSelf: 'center',
+    backgroundColor: '#0AD1C8',
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  buttonText: {
+    textAlign: 'center',
   },
 });
 

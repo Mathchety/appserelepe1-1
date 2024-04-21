@@ -12,7 +12,6 @@ const ConfigButton = () => {
             >
                 <AntDesign name="setting" size={24} color="black" />
                 </TouchableOpacity>
-
         </View>
     )
 }

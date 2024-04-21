@@ -6,9 +6,7 @@ const BackButton = () => {
     return (
         <View style={styles.container}>
             <TouchableOpacity
-                onPress={() => { }}
-                style={{ flexDirection: 'row', alignItems: 'center' }}
-            >
+                onPress={() => { }}            >
                 <AntDesign name="left" size={24} color="black" />
             </TouchableOpacity>
         </View>

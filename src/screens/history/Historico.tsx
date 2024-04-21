@@ -1,7 +1,9 @@
 import React , { useContext} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Header from '../../components/HeaderHistory';
 import { HistoryContext } from '../../Context/HistoryContext';
+import Colors from '../../constants/Colors';
+
 
 type HistoryContextData = {
   history: any[];
@@ -13,8 +15,9 @@ const Historico: React.FC = () => {
   return (
     <View style={{ flex: 1}}>
       <Header/>
+
+      <ScrollView>
       <View style={styles.container}>
-        <Text style= {styles.title}>Historico teste</Text>
         <View style={styles.historyContainer}>
           {history.map((item, index) => (
             <Text key={index} style={styles.historyItem}>
@@ -23,6 +26,7 @@ const Historico: React.FC = () => {
           ))}
         </View>
       </View>
+      </ScrollView>
     </View>
   );
 };
@@ -30,9 +34,10 @@ const Historico: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'green',
+    backgroundColor: Colors.lightBlue,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 10
   },
   title:{
     fontSize:24,

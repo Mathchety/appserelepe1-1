@@ -15,7 +15,7 @@ export const HistoryProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const addToHistory = (item: any) => {
     setHistory(currentHistory => {
-      const newHistory = [...currentHistory, item];
+      const newHistory = [item, ...currentHistory];
       return newHistory;
     });
   };
