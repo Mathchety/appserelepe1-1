@@ -1,22 +1,71 @@
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { FAB, PaperProvider, Portal } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Feed() {
+  const [state, setState] = React.useState({ open: false });
+  const navigation = useNavigation();
+  const onStateChange = ({ open }) => setState({ open });
+
+  const { open } = state;
+
   return (
-    <View style={styles.container}>
-      <Text style= {styles.title}>Home </Text>
-    </View>
+    <>
+      <PaperProvider>
+        <Portal >
+          <View style={styles.container}> 
+          {/* aqui vai o conteudo da pagina */}
+            <Text style={styles.title}>Home </Text>
+          </View>
+          <FAB.Group
+            open={open}
+            visible
+            icon={open ? 'close' : 'plus'}
+            actions={[
+              { icon: 'plus', onPress: () => '' },
+              {
+                icon: 'food',
+                label: 'Adicionar Calorias',
+                onPress: () => navigation.navigate('AddKcal'), // Update the onPress function to navigate to 'AddKcal' component using the correct syntax
+              },
+              {
+                icon: 'water',
+                label: 'Adicionar Água',
+                onPress: () => navigation.navigate('AddWater'),
+              },
+              {
+                icon: 'bell',
+                label: 'Remind',
+                onPress: () => console.log('Pressed notifications'),
+              },
+            ]}
+            onStateChange={onStateChange}
+            onPress={() => {
+              if (open) {
+                // do something if the speed dial is open
+              }
+            }}
+          />
+        </Portal>
+      </PaperProvider>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'red',
   },
-  title:{
-    fontSize:24,
+  title: {
+    fontSize: 24,
     fontWeight: 'bold',
-  }
+  },
+  fab: {
+
+    // Add your desired style values for the 'fab' property here
+  },
 });
