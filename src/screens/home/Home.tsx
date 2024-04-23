@@ -26,18 +26,20 @@ export default function Feed() {
               { icon: 'plus', onPress: () => '' },
               {
                 icon: 'food',
-                label: 'Adicionar Calorias',
-                onPress: () => navigation.navigate('AddKcal'), // Update the onPress function to navigate to 'AddKcal' component using the correct syntax
-              },
+                label: 'Almoço',
+                onPress: () => navigation.navigate('AddKcal'),              },
+              {
+                icon: 'food-apple',
+                label: 'Lanche',
+                onPress: () => navigation.navigate('AddKcal'),              },
+              {
+                icon: 'food-variant',
+                label: 'Jantar',
+                onPress: () => navigation.navigate('AddWater'),              },
               {
                 icon: 'water',
-                label: 'Adicionar Água',
+                label: 'Água',
                 onPress: () => navigation.navigate('AddWater'),
-              },
-              {
-                icon: 'bell',
-                label: 'Remind',
-                onPress: () => console.log('Pressed notifications'),
               },
             ]}
             onStateChange={onStateChange}

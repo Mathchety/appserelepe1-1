@@ -1,4 +1,6 @@
 import React, { createContext, useState } from 'react';
+import { formatDistanceToNow } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 interface HistoryContextData {
   history: any[];
@@ -15,7 +17,8 @@ export const HistoryProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const addToHistory = (item: any) => {
     setHistory(currentHistory => {
-      const newHistory = [item, ...currentHistory];
+      const newItem = { ...item, timestamp: new Date() };
+      const newHistory = [newItem, ...currentHistory];
       return newHistory;
     });
   };
