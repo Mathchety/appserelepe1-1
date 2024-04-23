@@ -11,8 +11,8 @@ type HistoryContextData = {
   addToHistory: (item: any) => void;
 };
 const AddKcal: React.FC = () => {
+  
   const { history, addToHistory } = useContext<HistoryContextData>(HistoryContext);
-
   const [inputText, setInputText] = React.useState('');
   const [suggestions, setSuggestions] = React.useState<any[]>(alimentos.slice(0, 10));
 
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   historyItem: {
-    flex:1,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '95%',
