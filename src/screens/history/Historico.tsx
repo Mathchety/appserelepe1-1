@@ -1,28 +1,45 @@
-import React , { useContext} from 'react';
+import React , { useContext, useEffect, useState} from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Header from '../../components/HeaderHistory';
 import { HistoryContext } from '../../Context/HistoryContext';
 import Colors from '../../constants/Colors';
+import { formatDistanceToNow } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 
 type HistoryContextData = {
-  history: any[];
+  history: { nome: string; porcao: string; valorkcal: string; timestamp: Date }[];
 };
 
 const Historico: React.FC = () => {
   const { history } = useContext<HistoryContextData>(HistoryContext);
+  const [currentMinute, setCurrentMinute] = useState(new Date().getMinutes());
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentMinute(new Date().getMinutes());
+    }, 60000); // Atualiza a cada minuto
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
   return (
     <View style={{ flex: 1}}>
       <Header/>
 
-      <ScrollView>
+      <ScrollView style={styles.historyScrollView}>
       <View style={styles.container}>
         <View style={styles.historyContainer}>
           {history.map((item, index) => (
-            <Text key={index} style={styles.historyItem}>
-              {item.nome} - {item.porcao} - {item.valorkcal} kcal
-            </Text>
+            <View key={index} style={styles.historyItem}>
+              <View>
+              <Text style={{ fontSize: 18 }}>{item.nome}</Text>
+              <Text style={{ fontSize: 12 }}>{item.porcao}</Text>
+              </View>
+              <Text>{item.valorkcal} Kcal</Text>
+              <Text style={styles.timestamp}>{formatDistanceToNow(item.timestamp, { addSuffix: true, locale: ptBR })}</Text>
+            </View>
           ))}
         </View>
       </View>
@@ -34,21 +51,38 @@ const Historico: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.lightBlue,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10
+    paddingLeft: 16,
+    paddingRight: 16,
+  },
+  historyScrollView: {
+    width: '100%',
   },
   title:{
     fontSize:24,
     fontWeight: 'bold',
   },
   historyContainer: {
+    width: '100%',
     marginTop: 20,
+    justifyContent: 'space-between',
   },
   historyItem: {
+    padding: 7,
+    backgroundColor: '#FFFFFF',
     fontSize: 18,
+    height: 55,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 10,
+    borderRadius: 5,
+    borderBottomWidth: 1, 
+    borderBottomColor: '#18ADB7', 
+  },
+  timestamp: {
+    fontSize: 12,
   },
 });
 

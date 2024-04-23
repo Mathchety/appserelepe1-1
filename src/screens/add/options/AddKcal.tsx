@@ -1,9 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView, Platform, ScrollView, TouchableOpacity } from 'react-native';
 import { HistoryContext } from '../../../Context/HistoryContext';
 import alimentos from '../../../data/alimentos.json';
 import Header from '../../../components/HeaderAddkcal';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { formatDistanceToNow } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
+import Icon from 'react-native-vector-icons';
 
 
 type HistoryContextData = {
@@ -11,13 +14,14 @@ type HistoryContextData = {
   addToHistory: (item: any) => void;
 };
 const AddKcal: React.FC = () => {
-  const { history, addToHistory } = useContext<HistoryContextData>(HistoryContext);
 
+  const { history, addToHistory } = useContext<HistoryContextData>(HistoryContext);
   const [inputText, setInputText] = React.useState('');
   const [suggestions, setSuggestions] = React.useState<any[]>(alimentos.slice(0, 10));
-
+  const [checkedIndex, setCheckedIndex] = useState<number | null>(null);
   const handleAddToHistory = (item: any) => {
     addToHistory(item);
+
   };
 
   function removeDiacritics(str) {
@@ -34,10 +38,9 @@ const AddKcal: React.FC = () => {
         const additionalItems = alimentos.filter(alimento => !filteredAlimentos.includes(alimento)).slice(0, 10 - filteredAlimentos.length);
         filteredAlimentos = [...filteredAlimentos, ...additionalItems];
       }
-      setSuggestions(filteredAlimentos.slice(0, 10));
+      setSuggestions(filteredAlimentos.slice(0, 5));
     }
   };
-
 
   return (
     <KeyboardAvoidingView
@@ -48,6 +51,7 @@ const AddKcal: React.FC = () => {
         <View style={styles.header}>
           <Header />
         </View>
+
         <View style={styles.containerTop}>
           <Text style={styles.totalKcal}>Total de kcal: {history.reduce((total, { valorkcal }) => total + valorkcal, 0)} Kcal</Text>
           <TextInput
@@ -67,40 +71,63 @@ const AddKcal: React.FC = () => {
                 setInputText('');
               }
             }}>
-            <Text>Add to history</Text>
+            <Text>Adicionar</Text>
           </TouchableOpacity>
         </View>
+
         <View style={styles.suggestionsTop}>
           {suggestions.length > 0 && (
+
             <View style={styles.suggestionsContainer}>
               {suggestions.map((suggestion, index) => (
-                <View key={index} style={styles.suggestionItem}>
-                  <Text onPress={() => setInputText(suggestion.nome)}>
-                    <Text>{suggestion.nome} - </Text>
-                    <Text>{suggestion.porcao} - </Text>
-                    <Text>{suggestion.valorkcal} kcal</Text>
-                  </Text>
-                  <Button title="+" onPress={() => handleAddToHistory(suggestion)} />
+
+                <View key={index} style={styles.suggestionBox}>
+
+                  <TouchableOpacity style={styles.suggestionItem} onPress={() => setInputText(suggestion.nome)}>
+                    <View >
+                      <Text style={{ fontSize: 18 }}>{suggestion.nome}  </Text>
+                      <Text style={{ fontSize: 12 }}>{suggestion.porcao}  </Text>
+                    </View>
+                    <Text style={{ fontSize: 18 }}>{suggestion.valorkcal} kcal</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center' }}
+                    onPress={() => {
+                      handleAddToHistory(suggestion);
+                      setCheckedIndex(index);
+                      setTimeout(() => setCheckedIndex(null), 1000);
+                    }}
+                  >
+                    <Icon
+                      name={checkedIndex === index ? 'check-circle' : 'plus-circle'}
+                      size={checkedIndex === index ? 30 : 20}
+                      color={checkedIndex === index ? 'green' : 'blue'}
+                    />
+                  </TouchableOpacity>
                 </View>
               ))}
             </View>
           )}
         </View>
-        <ScrollView style={styles.historyScrollView}>
-          <View style={styles.historyContainer}>
-            {history
-              .slice()
-              .reverse()
-              .map((item, index) => (
-                <View key={index} style={styles.historyItem}>
-                  <Text>{item.nome}</Text>
-                  <Text>{item.porcao}</Text>
-                  <Text>{item.valorkcal} kcal</Text>
-                </View>
-              ))}
-          </View>
-        </ScrollView>
       </SafeAreaView>
+
+      <ScrollView style={styles.historyScrollView}>
+        <View style={styles.historyContainer}>
+          <Text style={{ alignSelf: 'center' }}>Itens consumidos</Text>
+          {history
+            .slice()
+            .map((item, index) => (
+              <View key={index} style={styles.historyItem}>
+                <View>
+                  <Text style={{ fontSize: 18 }}>{item.nome}</Text>
+                  <Text style={{ fontSize: 12 }}>{item.porcao}</Text>
+                </View>
+                <Text>{item.valorkcal} kcal</Text>
+                <Text>{formatDistanceToNow(item.timestamp, { addSuffix: true, locale: ptBR })}</Text>
+              </View>
+            ))}
+        </View>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
@@ -108,9 +135,6 @@ const AddKcal: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#80ed99',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   header: {
     backgroundColor: '#fff',
@@ -119,12 +143,6 @@ const styles = StyleSheet.create({
   containerTop: {
     alignItems: 'center',
     justifyContent: 'flex-start',
-  },
-  suggestionsContainer: {
-    width: '100%',
-    marginTop: 10,
-    backgroundColor: '#fff',
-    borderRadius: 8,
   },
   input: {
     height: 40,
@@ -136,17 +154,31 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     textAlign: 'center',
   },
+  suggestionsContainer: {
+    width: '95%',
+    marginTop: 10,
+    marginLeft: 10,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   suggestionsTop: {
     width: '100%',
   },
-  suggestionItem: {
-    width: '95%',
+  suggestionBox: {
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 2,
     paddingLeft: 10,
     paddingRight: 10,
+  },
+  suggestionItem: {
+    width: '90%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   historyScrollView: {
     width: '100%',
@@ -159,11 +191,17 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   historyItem: {
-    flex:1,
+    padding: 7,
+    backgroundColor: '#FFFFFF',
+    fontSize: 18,
+    height: 55,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '95%',
-    backgroundColor: 'red',
+    alignItems: 'center',
+    marginBottom: 10,
+    borderRadius: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: '#18ADB7',
   },
   totalKcal: {
     fontSize: 18,

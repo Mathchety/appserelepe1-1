@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Navigation from './src/routers/stack.routes';
+import React from 'react';
 
 export default function App() {
   return ( 

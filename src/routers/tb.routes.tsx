@@ -19,7 +19,7 @@ const Tab = createBottomTabNavigator();
 export default function TabsRoutes() {
   return (
     <HistoryProvider>
-      <Tab.Navigator screenOptions={{ headerShown: false }} >
+      <Tab.Navigator backBehavior={'order'} screenOptions={{ headerShown: false }}>
         <Tab.Screen
             name='Home'
             component={Home}
@@ -36,14 +36,14 @@ export default function TabsRoutes() {
               tabBarLabel: ''
             }}
           />
-          <Tab.Screen
+          {/* <Tab.Screen
             name='Add'
             component={Add}
             options={{
               tabBarLabel: '',
               tabBarIcon: ({ color, size }) => (<ButtonAdd size={size} color={color} />),
             }}
-          />
+          /> */}
           <Tab.Screen
             name='historico'
             component={Historico}
