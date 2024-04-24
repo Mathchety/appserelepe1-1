@@ -1,20 +1,21 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView, Platform, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, SafeAreaView, Platform, ScrollView, TouchableOpacity } from 'react-native';
 import { HistoryContext } from '../../../Context/HistoryContext';
 import alimentos from '../../../data/alimentos.json';
 import Header from '../../../components/HeaderAddkcal';
-import { SafeAreaView } from 'react-native-safe-area-context';
+/* import { SafeAreaView } from 'react-native';
+ */
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import Icon from 'react-native-vector-icons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-type HistoryContextData = {
-  history: any[];
-  addToHistory: (item: any) => void;
-};
-const AddKcal: React.FC = () => {
-
+const AddKcal = () => {
+  
+  type HistoryContextData = {
+    history: any[];
+    addToHistory: (item: any) => void;
+  };
   const { history, addToHistory } = useContext<HistoryContextData>(HistoryContext);
   const [inputText, setInputText] = React.useState('');
   const [suggestions, setSuggestions] = React.useState<any[]>(alimentos.slice(0, 10));

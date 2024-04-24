@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { FAB, PaperProvider, Portal } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import AddKcal from '../add/options/AddKcal';
 
 export default function Feed() {
   const [state, setState] = React.useState({ open: false });
@@ -14,8 +15,8 @@ export default function Feed() {
     <>
       <PaperProvider>
         <Portal >
-          <View style={styles.container}> 
-          {/* aqui vai o conteudo da pagina */}
+          <View style={styles.container}>
+            {/* aqui vai o conteudo da pagina */}
             <Text style={styles.title}>Home </Text>
           </View>
           <FAB.Group
@@ -24,18 +25,21 @@ export default function Feed() {
             icon={open ? 'close' : 'plus'}
             actions={[
               { icon: 'plus', onPress: () => '' },
-              {
+              /* {
                 icon: 'food',
                 label: 'Almoço',
-                onPress: () => navigation.navigate('AddKcal'),              },
+                onPress: () => navigation.navigate('AddKcal'),
+              },
               {
                 icon: 'food-apple',
                 label: 'Lanche',
-                onPress: () => navigation.navigate('AddKcal'),              },
+                onPress: () => navigation.navigate(''),
+              }, */
               {
                 icon: 'food-variant',
                 label: 'Jantar',
-                onPress: () => navigation.navigate('AddWater'),              },
+                onPress: () => navigation.navigate('AddKcal') ,
+              },
               {
                 icon: 'water',
                 label: 'Água',
