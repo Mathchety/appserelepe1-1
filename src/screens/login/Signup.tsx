@@ -45,6 +45,7 @@ export default function Signup({ navigation }: { navigation: any }) {
       })
       .then(() => alert("Conta Criada com Sucesso 🎉"))
       .catch((error: any) => {
+        setLoading(false);
         alert(error.message);
       });
   };
