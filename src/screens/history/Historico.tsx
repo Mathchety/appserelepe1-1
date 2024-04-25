@@ -29,8 +29,8 @@ const Historico: React.FC = () => {
     <View style={{ flex: 1}}>
       <Header/>
     <View>
-      
       <Text style={{fontSize: 18, alignSelf:'center'}}>Meta de calorias: {progressValue} Kcal</Text>
+      <Text style={{fontSize: 18, alignSelf:'center'}}>Você ja consumiu: {history.reduce((total, { valorkcal }) => total + parseInt(valorkcal), 0)} Kcal</Text>
     </View>
       <ScrollView style={styles.historyScrollView}>
       <View style={styles.container}>

@@ -10,59 +10,63 @@ export default function Metas() {
   const [calorieGoal, setCalorieGoal] = useState(0); // Altere para 0 ou outro valor numérico inicial
   const [waterGoal, setWaterGoal] = useState(0);
 
-  const handleSetCalorieGoal = (value: number) => {
-    setCalorieGoal(value);
-  };
- 
-  
+  const progress = (progressValue / calorieGoal) * 100;
+
 
   return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Metas</Text>
-        <ProgressBar progress={10} color="#0000ff" />
-        <Button title="Definir Meta" onPress={() => setModalVisible(true)} />
+    <View style={styles.container}>
+      <Text> Sua meta diaria é {calorieGoal} Kcal</Text>
+      <Text> Sua meta diaria é {waterGoal.toFixed(3)} Litros</Text>
+      <ProgressBar progress={progress} color="#0000ff" />
+      <Text style={styles.title}>Defina suas Metas</Text>
+      <ProgressBar progress={10} color="#0000ff" />
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Definir Metas</Text>
 
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(!modalVisible);
-            }}
-          >
-            <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>Definir Metas</Text>
-
-              <TextInput
+            <TextInput
               style={styles.input}
               onChangeText={(text) => setCalorieGoal(Number(text))}
               value={calorieGoal.toString()}
               placeholder="Meta de ingestão de calorias"
               keyboardType="numeric"
-              />
+            />
 
-              <Text>Meta de ingestão de água: {waterGoal.toFixed(3)} litros</Text>
-              <Slider
+            <Text>Meta de ingestão de água: {waterGoal.toFixed(3)} litros</Text>
+            <Slider
               style={{ width: 200, height: 40 }}
               minimumValue={0}
               maximumValue={5}
               step={0.05}
               value={waterGoal}
               onValueChange={setWaterGoal}
-              />
+            />
 
-              <Button
+            <Button
               title="Finalizado"
               onPress={() => {
-                  setModalVisible(!modalVisible);
-                  setProgressValue(calorieGoal); 
-                }}
-              />
-            </View>
+                setModalVisible(!modalVisible);
+                setProgressValue(calorieGoal);
+              }}
+            />
           </View>
-        </Modal>
+        </View>
+      </Modal>
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Definir Meta"
+          onPress={() => setModalVisible(true)}
+        />
       </View>
+    </View>
   );
 }
 
@@ -88,7 +92,7 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 5
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
@@ -105,6 +109,8 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   title: {
-
-  }
+  },
+  buttonContainer: {
+    marginBottom: 20,
+  },
 });
