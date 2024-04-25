@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { FAB, PaperProvider, Portal } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import AddKcal from '../add/options/AddKcal';
 
 export default function Feed() {
   const [state, setState] = React.useState({ open: false });
@@ -25,7 +24,7 @@ export default function Feed() {
             icon={open ? 'close' : 'plus'}
             actions={[
               { icon: 'plus', onPress: () => '' },
-              /* {
+              {
                 icon: 'food',
                 label: 'Almoço',
                 onPress: () => navigation.navigate('AddKcal'),
@@ -33,8 +32,8 @@ export default function Feed() {
               {
                 icon: 'food-apple',
                 label: 'Lanche',
-                onPress: () => navigation.navigate(''),
-              }, */
+                onPress: () => navigation.navigate('AddKcal'),
+              },
               {
                 icon: 'food-variant',
                 label: 'Jantar',

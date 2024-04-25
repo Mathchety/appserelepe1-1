@@ -10,6 +10,7 @@ import Colors from "../../constants/Colors";
 import { auth, db } from "../../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { getAuth, signOut, } from "firebase/auth";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 
 export default function Logout({ navigation }: { navigation: any }) {
@@ -55,7 +56,7 @@ export default function Logout({ navigation }: { navigation: any }) {
     getData();
   }, []);
   return (
-    <View style={styles.tela}>
+    <SafeAreaView style={styles.tela}>
       {/* <Text style={{ fontSize: 25 }}>aqui{userName}</Text> */}
       <Text style={{ fontSize: 25 }}>{email}</Text>
       <Text style={{ fontSize: 25 }}>Olá!</Text>
@@ -85,18 +86,18 @@ export default function Logout({ navigation }: { navigation: any }) {
         </TouchableOpacity>
       </View>
 
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
   tela: {
+    flex: 1,
     backgroundColor: "F7F8F8",
     justifyContent: "center",
     alignItems: "center",
