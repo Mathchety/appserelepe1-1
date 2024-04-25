@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import ButtonCopo from '../../../components/Button/ButtonCopo';
+import Header from "../../../components/HeaderAgua";
+import Colors from '../../../constants/Colors';
 
 const AddWater = () => {
   const [value, setValue] = useState('');
@@ -35,18 +37,19 @@ const AddWater = () => {
 
   return (
     <View style={styles.container}>
+      <Header />
       <Text style={{ marginTop: 20 }}>Soma: {sum}ML</Text>
       <View style={styles.containerInput}>
-      <TextInput
-        style={styles.textInput}
-        onChangeText={text => setValue(text)}
-        value={value}
-        keyboardType="numeric"  
-      />
-      <TouchableOpacity style={styles.botaoCopo}>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={text => setValue(text)}
+          value={value}
+          keyboardType="numeric"
+        />
+        <TouchableOpacity style={styles.botaoCopo}>
           <ButtonCopo onPress={handlePressCup} />
-            <Text style={styles.textCup}>+250ML</Text>
-      </TouchableOpacity>
+          <Text style={styles.textCup}>+250ML</Text>
+        </TouchableOpacity>
       </View>
 
       <Button
@@ -55,7 +58,7 @@ const AddWater = () => {
       />
 
       <Text style={{ marginTop: 20 }}>Histórico:</Text>
-      <ScrollView style={{ maxHeight: 200 }}>
+      <ScrollView style={styles.historico}>
         {history.map((item, index) => (
           <View key={index} style={styles.historyItem}>
             <Text>{item.value}ML</Text>
@@ -71,7 +74,7 @@ const AddWater = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    marginTop: 50,
+    marginTop: 33,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -81,17 +84,21 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 2,
 
-    alignItems: 'center', 
+    alignItems: 'center',
     justifyContent: 'center',
     marginLeft: '36%',
-
-    
   },
   historyItem: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 3,
+    gap: 20,
+  },
+  historico: {
+    width: '100%', 
+    backgroundColor: Colors.backgroundcolor_primary,
+   
   },
   botaoCopo: {
     /* backgroundColor: 'blue', */
@@ -110,7 +117,7 @@ const styles = StyleSheet.create({
   textCup: {
     fontSize: 9,
     /* backgroundColor: 'green', */
-    
+
   },
 });
 

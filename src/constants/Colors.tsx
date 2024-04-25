@@ -1,3 +1,5 @@
+import { ImageBackground } from "react-native";
+
 const Colors = {
     light: "#eeee",
     grey: "#D8D8D8",
@@ -11,6 +13,7 @@ const Colors = {
     lightBlue: "#00A8DE",
     text: "#3EADDF",
     alert: "#ff0000",
+    backgroundcolor_primary: '#ffffeb',
   };
   
   export default Colors;
