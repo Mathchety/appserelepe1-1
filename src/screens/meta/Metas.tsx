@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Modal, Button, TextInput } from 'react-native';
 import { ProgressBar, Title } from 'react-native-paper';
 import ProgressContext from '../../Context/ProgressContext';
 import Slider from '@react-native-community/slider';
+import Header from '../../components/HeaderMetas';
 
 export default function Metas() {
   const { progressValue, setProgressValue } = useContext(ProgressContext);
@@ -15,6 +16,7 @@ export default function Metas() {
 
   return (
     <View style={styles.container}>
+      <Header/>
       <Text> Sua meta diaria é {calorieGoal} Kcal</Text>
       <Text> Sua meta diaria é {waterGoal.toFixed(3)} Litros</Text>
       <ProgressBar progress={progress} color="#0000ff" />

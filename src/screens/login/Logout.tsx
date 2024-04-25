@@ -11,6 +11,8 @@ import { auth, db } from "../../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { getAuth, signOut, } from "firebase/auth";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Header from '../../components/HeaderPerfil';
+import { blue100 } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
 
 
 export default function Logout({ navigation }: { navigation: any }) {
@@ -35,7 +37,7 @@ export default function Logout({ navigation }: { navigation: any }) {
 
       if (userDocSnap.exists()) {
         const userData = userDocSnap.data();
-        setUserName(userData?.Name); 
+        setUserName(userData?.Name);
 
         // Agora você pode usar o nome do usuário onde precisar
       } else {
@@ -48,7 +50,7 @@ export default function Logout({ navigation }: { navigation: any }) {
     if (user) {
       // Fetch the user's email
       setEmail(user.email);
-      
+
     }
   }
 
@@ -57,35 +59,30 @@ export default function Logout({ navigation }: { navigation: any }) {
   }, []);
   return (
     <SafeAreaView style={styles.tela}>
-      {/* <Text style={{ fontSize: 25 }}>aqui{userName}</Text> */}
-      <Text style={{ fontSize: 25 }}>{email}</Text>
-      <Text style={{ fontSize: 25 }}>Olá!</Text>
-      
-      <View>
-        <TouchableOpacity style={styles.button} onPress={handleSignout}>
-          <Text style={{ color: Colors.white, fontSize: 20 }}>Sair</Text>
-        </TouchableOpacity>
-      </View>
+      <Header />
+      <View style={styles.conteudo}>{/* <Text style={{ fontSize: 25 }}>aqui{userName}</Text> */}
+        <Text style={{ fontSize: 25 }}>{email}</Text>
+        <Text style={{ fontSize: 25 }}>Olá!</Text>
 
-      <View  style={styles.container}>
-        
+        <View style={styles.container}>
+
           <Text style={styles.conta}>Dados Pessoais</Text>
-          
+
           <Text style={styles.conquistas}>Conquistas</Text>
 
           <Text style={styles.progresso}>Progresso</Text>
 
           <Text style={styles.meta}>Meta de Injestão</Text>
 
+        </View>
+
+
+        <View>
+          <TouchableOpacity style={styles.button} onPress={handleSignout}>
+            <Text style={{ color: Colors.white, fontSize: 20 }}>Sair</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-
-
-      <View>
-        <TouchableOpacity style={styles.button} onPress={handleSignout}>
-          <Text style={{ color: Colors.white, fontSize: 20 }}>Sair</Text>
-        </TouchableOpacity>
-      </View>
-
     </SafeAreaView>
   );
 }
@@ -97,6 +94,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   tela: {
+    flex: 1,
+    backgroundColor: "F7F8F8",
+    /* justifyContent: "center", */
+    alignItems: "center",
+  },
+  conteudo : {
     flex: 1,
     backgroundColor: "F7F8F8",
     justifyContent: "center",
@@ -130,9 +133,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  
+
   meta: {
-    
+
     justifyContent: "center",
     alignItems: "center",
     color: "grey",
