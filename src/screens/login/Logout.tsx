@@ -13,6 +13,7 @@ import { getAuth, signOut, } from "firebase/auth";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from '../../components/HeaderPerfil';
 import { blue100 } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
+import AvatarImage from "../../components/Avatar";
 
 
 export default function Logout({ navigation }: { navigation: any }) {
@@ -61,6 +62,7 @@ export default function Logout({ navigation }: { navigation: any }) {
     <SafeAreaView style={styles.tela}>
       <Header />
       <View style={styles.conteudo}>{/* <Text style={{ fontSize: 25 }}>aqui{userName}</Text> */}
+      <AvatarImage/>
         <Text style={{ fontSize: 25 }}>{email}</Text>
         <Text style={{ fontSize: 25 }}>Olá!</Text>
 
