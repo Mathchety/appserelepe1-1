@@ -13,6 +13,7 @@ import Historico from '../screens/history/Historico';
 import AddKcal from '../screens/add/options/AddKcal';
 import AddWater from '../screens/add/options/AddAgua';
 import Logout from '../screens/login/Logout';
+import QuestPeso from '../screens/questionario/QuestPeso';
 
 const Tab = createBottomTabNavigator();
 
@@ -70,6 +71,11 @@ export default function TabsRoutes() {
           <Tab.Screen
             name="AddKcal"
             component={AddKcal}
+            options={{ tabBarButton: () => null }}
+          />
+          <Tab.Screen
+            name="QuestPeso"
+            component={QuestPeso}
             options={{ tabBarButton: () => null }}
           />
       </Tab.Navigator>

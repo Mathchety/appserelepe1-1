@@ -32,7 +32,7 @@ export default function Feed() {
               {
                 icon: 'food-apple',
                 label: 'Lanche',
-                onPress: () => navigation.navigate('AddKcal'),
+                onPress: () => navigation.navigate('QuestPeso'),
               },
               {
                 icon: 'food-variant',
