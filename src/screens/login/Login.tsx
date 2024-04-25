@@ -38,6 +38,7 @@ export default function Login({ navigation }: { navigation: any }) {
         .catch((error) => {
           const errorMessage = error.message;
           alert(errorMessage)
+          setLoading(false);
         });
   };
 
