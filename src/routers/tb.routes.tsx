@@ -3,21 +3,23 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Feather } from '@expo/vector-icons';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
-
+//Contextos
 import { HistoryProvider } from '../Context/HistoryContext';
+import {ProgressProvider} from '../Context/ProgressContext';
+//Telas
 import Home from '../screens/home/Home';
 import Metas from '../screens/meta/Metas';
 import Historico from '../screens/history/Historico';
-import ButtonAdd from '../components/ButtonAdd';
 import AddKcal from '../screens/add/options/AddKcal';
 import AddWater from '../screens/add/options/AddAgua';
 import Logout from '../screens/login/Logout';
-import Add from "../screens/add/Add";
 
 const Tab = createBottomTabNavigator();
 
 export default function TabsRoutes() {
   return (
+
+    <ProgressProvider>
     <HistoryProvider>
       <Tab.Navigator backBehavior={'order'} screenOptions={{ headerShown: false }}>
         <Tab.Screen
@@ -72,5 +74,6 @@ export default function TabsRoutes() {
           />
       </Tab.Navigator>
     </HistoryProvider>
+    </ProgressProvider>
   )
 }
