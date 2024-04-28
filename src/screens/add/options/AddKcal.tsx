@@ -26,7 +26,7 @@ const AddKcal = () => {
 
 
 
-  
+
   const handleAddToHistory = async (item: any) => {
 
 
@@ -35,8 +35,8 @@ const AddKcal = () => {
        addToHistory(item);
 
 
-          const name = item;            //e o local para setar os dados que serao levados ao firebase
-          const collectionRef = collection(db, "users", user.uid, "historico");     //caminho para ele saber onde vai adcionar/
+          const name = item;     // MUDAR PARA UMA ARRAY       //e o local para setar os dados que serao levados ao firebase
+          const collectionRef = collection(db, "users", user.uid, "almoço",);                                                     //caminho para ele saber onde vai adcionar/
           const payload = { name, CreatedAt: new Date().toUTCString() };       //Adciona no documento do usuario os dados "NAME" e O TEMPO
           const docRef = await addDoc(collectionRef, payload);
 
