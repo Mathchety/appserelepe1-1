@@ -41,10 +41,7 @@ export default function Signup({ navigation }: { navigation: any }) {
           Email: email,
           PhoneNumber: phone,
           CreatedAt: new Date().toUTCString(),
-        });
-        setDoc(doc(db, "users", user.uid, "historico", "historicoId"), {
-          Item: ''
-        });
+        });     
       })
       .then(() => alert("Conta Criada com Sucesso 🎉"))
       .catch((error: any) => {
