@@ -41,7 +41,7 @@ export default function Signup({ navigation }: { navigation: any }) {
           Email: email,
           PhoneNumber: phone,
           CreatedAt: new Date().toUTCString(),
-        });     
+        });
       })
       .then(() => alert("Conta Criada com Sucesso 🎉"))
       .catch((error: any) => {
