@@ -15,7 +15,6 @@ const Historico: React.FC = () => {
   const [currentMinute, setCurrentMinute] = useState(new Date().getMinutes());
   const { progressValue, setProgressValue } = useContext(ProgressContext);
 
-
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentMinute(new Date().getMinutes());

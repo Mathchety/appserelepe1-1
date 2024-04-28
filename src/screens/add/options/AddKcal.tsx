@@ -3,10 +3,12 @@ import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, SafeAreaView, 
 import { HistoryContext } from '../../../Context/HistoryContext';
 import alimentos from '../../../data/alimentos.json';
 import Header from '../../../components/HeaderAddkcal';
-
+import { auth, db } from '../../../firebase/firebase';
+import { useEffect } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { addDoc, collection } from 'firebase/firestore';
 
 
 const AddKcal = () => {
@@ -19,10 +21,33 @@ const AddKcal = () => {
   const [inputText, setInputText] = React.useState('');
   const [suggestions, setSuggestions] = React.useState<any[]>(alimentos.slice(0, 7));
   const [checkedIndex, setCheckedIndex] = useState<number | null>(null);
-  const handleAddToHistory = (item: any) => {
-    addToHistory(item);
 
+
+
+
+
+  
+  const handleAddToHistory = async (item: any) => {
+
+
+    const user = auth.currentUser
+
+       addToHistory(item);
+
+
+          const name = item;            //e o local para setar os dados que serao levados ao firebase
+          const collectionRef = collection(db, "users", user.uid, "historico");     //caminho para ele saber onde vai adcionar/
+          const payload = { name, CreatedAt: new Date().toUTCString() };       //Adciona no documento do usuario os dados "NAME" e O TEMPO
+          const docRef = await addDoc(collectionRef, payload);
+
+
+    console.log("The new ID is: " + name);
   };
+  
+
+
+
+
 
   function removeDiacritics(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
