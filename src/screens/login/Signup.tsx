@@ -36,11 +36,14 @@ export default function Signup({ navigation }: { navigation: any }) {
       .then((userCredential) => {
         const user = userCredential.user;
         setLoading(false);
-        setDoc(doc(db, "users", user.uid), {
+        setDoc(doc(db, "users", user.uid ), {
           Name: username,
           Email: email,
           PhoneNumber: phone,
           CreatedAt: new Date().toUTCString(),
+        });
+        setDoc(doc(db, "users", user.uid, "historico", "historicoId"), {
+          Item: ''
         });
       })
       .then(() => alert("Conta Criada com Sucesso 🎉"))
