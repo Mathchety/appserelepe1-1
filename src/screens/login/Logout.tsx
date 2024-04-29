@@ -12,7 +12,6 @@ import { doc, getDoc } from "firebase/firestore";
 import { getAuth, signOut, } from "firebase/auth";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from '../../components/HeaderPerfil';
-import { blue100 } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
 import AvatarImage from "../../components/Avatar";
 
 
@@ -57,7 +56,7 @@ export default function Logout({ navigation }: { navigation: any }) {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, );
   return (
     <SafeAreaView style={styles.tela}>
       <Header />
