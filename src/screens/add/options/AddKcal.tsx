@@ -4,50 +4,44 @@ import { HistoryContext } from '../../../Context/HistoryContext';
 import alimentos from '../../../data/alimentos.json';
 import Header from '../../../components/HeaderAddkcal';
 import { auth, db } from '../../../firebase/firebase';
-import { useEffect } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { addDoc, collection } from 'firebase/firestore';
+import { FontAwesome } from '@expo/vector-icons';
+import { arrayUnion, doc, setDoc, getFirestore } from 'firebase/firestore';
 
 
 const AddKcal = () => {
 
   type HistoryContextData = {
     history: any[];
+    setHistory: React.Dispatch<React.SetStateAction<any[]>>;
     addToHistory: (item: any) => void;
+    removeFromHistory: (id: string) => void; // Adicionado
   };
-  const { history, addToHistory } = useContext<HistoryContextData>(HistoryContext);
+  const { history, setHistory, addToHistory, removeFromHistory } = useContext<HistoryContextData>(HistoryContext);
+  
   const [inputText, setInputText] = React.useState('');
   const [suggestions, setSuggestions] = React.useState<any[]>(alimentos.slice(0, 7));
   const [checkedIndex, setCheckedIndex] = useState<number | null>(null);
+  const db = getFirestore();
 
-
-
-
-
-
+  const user = auth.currentUser;
   const handleAddToHistory = async (item: any) => {
+    setHistory(currentHistory => {
+      const newItem = { ...item, timestamp: new Date(), id: Date.now().toString() };
+      return [newItem, ...currentHistory]; // Modificado
+    });
+    const almoco = item;
+    const today = new Date().toISOString().split('T')[0];
+    const docRef = doc(db, "users", user.uid, "historico", today);           // Path to the document
+    const payload = {
+      almoco: arrayUnion({ almoco, CreatedAt: new Date().toLocaleString() }) // Add the new item to the 'almocos' array
+    };
+    await setDoc(docRef, payload, { merge: true });                          // Merge the new data with the existing document data
+    console.log("The new ID is: " + almoco + ' ' + today);
 
-
-    const user = auth.currentUser
-
-       addToHistory(item);
-
-
-          const name = item;     // MUDAR PARA UMA ARRAY       //e o local para setar os dados que serao levados ao firebase
-          const collectionRef = collection(db, "users", user.uid, "almoço",);                                                     //caminho para ele saber onde vai adcionar/
-          const payload = { name, CreatedAt: new Date().toUTCString() };       //Adciona no documento do usuario os dados "NAME" e O TEMPO
-          const docRef = await addDoc(collectionRef, payload);
-
-
-    console.log("The new ID is: " + name);
   };
-  
-
-
-
-
 
   function removeDiacritics(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -148,6 +142,10 @@ const AddKcal = () => {
                   </View>
                   <Text>{item.valorkcal} kcal</Text>
                   <Text>{formatDistanceToNow(item.timestamp, { addSuffix: true, locale: ptBR })}</Text>
+                  <TouchableOpacity
+                     onPress={() => removeFromHistory(item.id)}>
+                    <FontAwesome name="trash-o" size={24} color="black" />
+                  </TouchableOpacity>
                 </View>
               ))}
           </View>
