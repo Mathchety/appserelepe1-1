@@ -2,10 +2,9 @@ import React , { useContext, useEffect, useState} from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import Header from '../../components/HeaderHistory';
 import { HistoryContext } from '../../Context/HistoryContext';
-import Colors from '../../constants/Colors';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-
+import  ProgressContext  from '../../Context/ProgressContext';
 
 type HistoryContextData = {
   history: { nome: string; porcao: string; valorkcal: string; timestamp: Date }[];
@@ -14,6 +13,7 @@ type HistoryContextData = {
 const Historico: React.FC = () => {
   const { history } = useContext<HistoryContextData>(HistoryContext);
   const [currentMinute, setCurrentMinute] = useState(new Date().getMinutes());
+  const { progressValue, setProgressValue } = useContext(ProgressContext);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -27,7 +27,10 @@ const Historico: React.FC = () => {
   return (
     <View style={{ flex: 1}}>
       <Header/>
-
+    <View>
+      <Text style={{fontSize: 18, alignSelf:'center'}}>Meta de calorias: {progressValue} Kcal</Text>
+      <Text style={{fontSize: 18, alignSelf:'center'}}>Você ja consumiu: {history.reduce((total, { valorkcal }) => total + parseInt(valorkcal), 0)} Kcal</Text>
+    </View>
       <ScrollView style={styles.historyScrollView}>
       <View style={styles.container}>
         <View style={styles.historyContainer}>

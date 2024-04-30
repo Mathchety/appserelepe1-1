@@ -99,3 +99,4 @@ Apos excluir, baixe novamente o `package.json` e execute no terminal o seguinte 
 -[CodeSandbox — Discord](https://discord.gg/Ggarp3pX5H)
 
 -[Icon](https://icons.expo.fyi/Index)
+-[Cores](https://coolors.co/palette/d9ed92-b5e48c-99d98c-76c893-52b69a-34a0a4-168aad-1a759f-1e6091-184e77)

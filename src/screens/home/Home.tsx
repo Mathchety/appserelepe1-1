@@ -14,8 +14,8 @@ export default function Feed() {
     <>
       <PaperProvider>
         <Portal >
-          <View style={styles.container}> 
-          {/* aqui vai o conteudo da pagina */}
+          <View style={styles.container}>
+            {/* aqui vai o conteudo da pagina */}
             <Text style={styles.title}>Home </Text>
           </View>
           <FAB.Group
@@ -27,15 +27,18 @@ export default function Feed() {
               {
                 icon: 'food',
                 label: 'Almoço',
-                onPress: () => navigation.navigate('AddKcal'),              },
+                onPress: () => navigation.navigate('AddKcal'),
+              },
               {
                 icon: 'food-apple',
                 label: 'Lanche',
-                onPress: () => navigation.navigate('AddKcal'),              },
+                onPress: () => navigation.navigate('QuestPeso'),
+              },
               {
                 icon: 'food-variant',
                 label: 'Jantar',
-                onPress: () => navigation.navigate('AddWater'),              },
+                onPress: () => navigation.navigate('AddKcal') ,
+              },
               {
                 icon: 'water',
                 label: 'Água',

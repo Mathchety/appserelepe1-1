@@ -1,26 +1,45 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView, Platform, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, SafeAreaView, Platform, ScrollView, TouchableOpacity } from 'react-native';
 import { HistoryContext } from '../../../Context/HistoryContext';
 import alimentos from '../../../data/alimentos.json';
 import Header from '../../../components/HeaderAddkcal';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { auth, db } from '../../../firebase/firebase';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import Icon from 'react-native-vector-icons';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { FontAwesome } from '@expo/vector-icons';
+import { arrayUnion, doc, setDoc, getFirestore } from 'firebase/firestore';
 
 
-type HistoryContextData = {
-  history: any[];
-  addToHistory: (item: any) => void;
-};
-const AddKcal: React.FC = () => {
+const AddKcal = () => {
 
-  const { history, addToHistory } = useContext<HistoryContextData>(HistoryContext);
+  type HistoryContextData = {
+    history: any[];
+    setHistory: React.Dispatch<React.SetStateAction<any[]>>;
+    addToHistory: (item: any) => void;
+    removeFromHistory: (id: string) => void; // Adicionado
+  };
+  const { history, setHistory, addToHistory, removeFromHistory } = useContext<HistoryContextData>(HistoryContext);
+  
   const [inputText, setInputText] = React.useState('');
-  const [suggestions, setSuggestions] = React.useState<any[]>(alimentos.slice(0, 10));
+  const [suggestions, setSuggestions] = React.useState<any[]>(alimentos.slice(0, 7));
   const [checkedIndex, setCheckedIndex] = useState<number | null>(null);
-  const handleAddToHistory = (item: any) => {
-    addToHistory(item);
+  const db = getFirestore();
+
+  const user = auth.currentUser;
+  const handleAddToHistory = async (item: any) => {
+    setHistory(currentHistory => {
+      const newItem = { ...item, timestamp: new Date(), id: Date.now().toString() };
+      return [newItem, ...currentHistory]; // Modificado
+    });
+    const almoco = item;
+    const today = new Date().toISOString().split('T')[0];
+    const docRef = doc(db, "users", user.uid, "historico", today);           // Path to the document
+    const payload = {
+      almoco: arrayUnion({ almoco, CreatedAt: new Date().toLocaleString() }) // Add the new item to the 'almocos' array
+    };
+    await setDoc(docRef, payload, { merge: true });                          // Merge the new data with the existing document data
+    console.log("The new ID is: " + almoco + ' ' + today);
 
   };
 
@@ -31,23 +50,23 @@ const AddKcal: React.FC = () => {
   const handleInputChange = text => {
     setInputText(text);
     if (text === '') {
-      setSuggestions(alimentos.slice(0, 10));
+      setSuggestions(alimentos.slice(0, 7));
     } else {
       let filteredAlimentos = alimentos.filter(alimento => removeDiacritics(alimento.nome.toLowerCase()).includes(removeDiacritics(text.toLowerCase())));
-      if (filteredAlimentos.length < 10) {
-        const additionalItems = alimentos.filter(alimento => !filteredAlimentos.includes(alimento)).slice(0, 10 - filteredAlimentos.length);
+      if (filteredAlimentos.length < 7) {
+        const additionalItems = alimentos.filter(alimento => !filteredAlimentos.includes(alimento)).slice(0, 7 - filteredAlimentos.length);
         filteredAlimentos = [...filteredAlimentos, ...additionalItems];
       }
-      setSuggestions(filteredAlimentos.slice(0, 5));
+      setSuggestions(filteredAlimentos.slice(0, 7));
     }
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
-      <SafeAreaView>
+    <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+
         <View style={styles.header}>
           <Header />
         </View>
@@ -109,26 +128,30 @@ const AddKcal: React.FC = () => {
             </View>
           )}
         </View>
-      </SafeAreaView>
 
-      <ScrollView style={styles.historyScrollView}>
-        <View style={styles.historyContainer}>
-          <Text style={{ alignSelf: 'center' }}>Itens consumidos</Text>
-          {history
-            .slice()
-            .map((item, index) => (
-              <View key={index} style={styles.historyItem}>
-                <View>
-                  <Text style={{ fontSize: 18 }}>{item.nome}</Text>
-                  <Text style={{ fontSize: 12 }}>{item.porcao}</Text>
+        <ScrollView style={styles.historyScrollView}>
+          <View style={styles.historyContainer}>
+            <Text style={{ alignSelf: 'center' }}>Itens consumidos</Text>
+            {history
+              .slice()
+              .map((item, index) => (
+                <View key={index} style={styles.historyItem}>
+                  <View>
+                    <Text style={{ fontSize: 18 }}>{item.nome}</Text>
+                    <Text style={{ fontSize: 12 }}>{item.porcao}</Text>
+                  </View>
+                  <Text>{item.valorkcal} kcal</Text>
+                  <Text>{formatDistanceToNow(item.timestamp, { addSuffix: true, locale: ptBR })}</Text>
+                  <TouchableOpacity
+                     onPress={() => removeFromHistory(item.id)}>
+                    <FontAwesome name="trash-o" size={24} color="black" />
+                  </TouchableOpacity>
                 </View>
-                <Text>{item.valorkcal} kcal</Text>
-                <Text>{formatDistanceToNow(item.timestamp, { addSuffix: true, locale: ptBR })}</Text>
-              </View>
-            ))}
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+              ))}
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
@@ -137,6 +160,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
+    marginTop: 33,
     backgroundColor: '#fff',
     width: '100%'
   },
@@ -198,7 +222,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 2,
     borderRadius: 5,
     borderBottomWidth: 1,
     borderBottomColor: '#18ADB7',

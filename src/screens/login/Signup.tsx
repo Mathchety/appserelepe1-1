@@ -36,7 +36,7 @@ export default function Signup({ navigation }: { navigation: any }) {
       .then((userCredential) => {
         const user = userCredential.user;
         setLoading(false);
-        setDoc(doc(db, "users", user.uid), {
+        setDoc(doc(db, "users", user.uid ), {
           Name: username,
           Email: email,
           PhoneNumber: phone,
@@ -45,6 +45,7 @@ export default function Signup({ navigation }: { navigation: any }) {
       })
       .then(() => alert("Conta Criada com Sucesso 🎉"))
       .catch((error: any) => {
+        setLoading(false);
         alert(error.message);
       });
   };
