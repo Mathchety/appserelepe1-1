@@ -18,7 +18,7 @@ const Add = ({ navigation }) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('AddWater')}
           style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'green', width: '80%', height: 100 }}
-        ><Text>Adicionar consumo de Água</Text>
+        ><Text>Adicionssssssssssssssssssssssssssssssssssssar consumo de Água</Text>
         </TouchableOpacity>
       </View>
     </>
