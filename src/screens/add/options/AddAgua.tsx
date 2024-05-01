@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
     marginTop: 33,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#fff',
   },
   textInput: {
     height: 40,
