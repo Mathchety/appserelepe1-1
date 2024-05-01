@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Modal, Button, TextInput } from 'react-native';
 import { ProgressBar, Title } from 'react-native-paper';
 import ProgressContext from '../../Context/ProgressContext';
 import Slider from '@react-native-community/slider';
-import Header from '../../components/HeaderMetas';
+import Header from '../../components/Header/HeaderMetas';
 
 export default function Metas() {
   const { progressValue, setProgressValue } = useContext(ProgressContext);

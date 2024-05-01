@@ -1,7 +1,7 @@
 import React from 'react';
 import { View,  StyleSheet, Text } from 'react-native';
-import BackButton from './Button/BackButton';
-import ConfigButton from './Button/ConfigButton';
+import BackButton from '../Button/BackButton';
+import ConfigButton from '../Button/ConfigButton';
 
 
 const Header = () => {

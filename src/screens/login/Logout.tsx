@@ -11,7 +11,7 @@ import { auth, db } from "../../firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { getAuth, signOut, } from "firebase/auth";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Header from '../../components/HeaderPerfil';
+import Header from '../../components/Header/HeaderPerfil';
 import AvatarImage from "../../components/Avatar";
 
 

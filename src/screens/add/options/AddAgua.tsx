@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import ButtonCopo from '../../../components/Button/ButtonCopo';
-import Header from "../../../components/HeaderAgua";
+import Header from "../../../components/Header/HeaderAgua";
 import Colors from '../../../constants/Colors';
 
 const AddWater = () => {

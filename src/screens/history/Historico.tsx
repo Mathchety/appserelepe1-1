@@ -1,6 +1,6 @@
 import React , { useContext, useEffect, useState} from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import Header from '../../components/HeaderHistory';
+import Header from '../../components/Header/HeaderHistory';
 import { HistoryContext } from '../../Context/HistoryContext';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';

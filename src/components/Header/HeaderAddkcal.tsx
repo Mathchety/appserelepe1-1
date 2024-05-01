@@ -1,14 +1,14 @@
 import React from 'react';
 import { View,  StyleSheet, Text } from 'react-native';
-import BackButton from './Button/BackButton';
-import ConfigButton from './Button/ConfigButton';
+import BackButton from '../Button/BackButton';
+import ConfigButton from '../Button/ConfigButton';
 
 
 const Header = () => {
     return (
         <View style={styles.header}>
             <BackButton/>
-            <Text style={styles.textContainer}>Metas</Text>
+            <Text style={styles.textContainer}>Adicionar calorias</Text>
             <ConfigButton/>
         </View>
     )

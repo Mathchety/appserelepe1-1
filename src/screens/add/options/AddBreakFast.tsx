@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, KeyboardAvoidingView, SafeAreaView, Platform, ScrollView, TouchableOpacity } from 'react-native';
 import { HistoryContext } from '../../../Context/HistoryContext';
 import alimentos from '../../../data/alimentos.json';
-import Header from '../../../components/HeaderAddkcal';
+import Header from '../../../components/Header/HeaderAddkcal';
 import { auth, db } from '../../../firebase/firebase';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -11,7 +11,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { arrayUnion, doc, setDoc, getFirestore } from 'firebase/firestore';
 
 
-const AddKcal = () => {
+const AddBreakFast = () => {
 
   type HistoryContextData = {
     history: any[];
@@ -30,13 +30,13 @@ const AddKcal = () => {
   const handleAddToHistory = async (item: any) => {
     setHistory(currentHistory => {
       const newItem = { ...item, timestamp: new Date(), id: Date.now().toString() };
-      return [newItem, ...currentHistory]; // Modificado
+      return [newItem, ...currentHistory]; 
     });
     const almoco = item;
     const today = new Date().toISOString().split('T')[0];
     const docRef = doc(db, "users", user.uid, "historico", today);           // Path to the document
     const payload = {
-      almoco: arrayUnion({ almoco, CreatedAt: new Date().toLocaleString() }) // Add the new item to the 'almocos' array
+      breakFast: arrayUnion({ almoco, CreatedAt: new Date().toLocaleString() }) // Add the new item to the 'almocos' array
     };
     await setDoc(docRef, payload, { merge: true });                          // Merge the new data with the existing document data
     console.log("The new ID is: " + almoco + ' ' + today);
@@ -66,7 +66,6 @@ const AddKcal = () => {
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
-
         <View style={styles.header}>
           <Header />
         </View>
@@ -247,4 +246,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddKcal;
+export default AddBreakFast;

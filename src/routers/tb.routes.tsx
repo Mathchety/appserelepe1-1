@@ -10,10 +10,11 @@ import {ProgressProvider} from '../Context/ProgressContext';
 import Home from '../screens/home/Home';
 import Metas from '../screens/meta/Metas';
 import Historico from '../screens/history/Historico';
-import AddKcal from '../screens/add/options/AddKcal';
+import AddLunch from '../screens/add/options/AddLunch';
 import AddWater from '../screens/add/options/AddAgua';
 import Logout from '../screens/login/Logout';
-import QuestPeso from '../screens/questionario/QuestPeso';
+import AddDinner from '../screens/add/options/AddDinner';
+import AddBreakFast from '../screens/add/options/AddBreakFast';
 
 const Tab = createBottomTabNavigator();
 
@@ -69,13 +70,19 @@ export default function TabsRoutes() {
             options={{ tabBarButton: () => null }}
           />
           <Tab.Screen
-            name="AddKcal"
-            component={AddKcal}
+            name="AddDinner"
+            component={AddDinner}
             options={{ tabBarButton: () => null }}
           />
           <Tab.Screen
-            name="QuestPeso"
-            component={QuestPeso}
+            name="AddLunch"
+            component={AddLunch}
+            options={{ tabBarButton: () => null }}
+          />
+
+          <Tab.Screen
+            name="AddBreakFast"
+            component={AddBreakFast}
             options={{ tabBarButton: () => null }}
           />
       </Tab.Navigator>

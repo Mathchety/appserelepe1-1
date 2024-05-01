@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { FAB, PaperProvider, Portal } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import { MaterialIcons } from '@expo/vector-icons';
+import Colors from '../../constants/Colors';
 
 export default function Feed() {
   const [state, setState] = React.useState({ open: false });
@@ -25,24 +27,29 @@ export default function Feed() {
             actions={[
               { icon: 'plus', onPress: () => '' },
               {
-                icon: 'food',
-                label: 'Almoço',
-                onPress: () => navigation.navigate('AddKcal'),
+                icon: 'water',
+                label: 'Água',
+                onPress: () => navigation.navigate('AddWater'),
               },
               {
                 icon: 'food-apple',
                 label: 'Lanche',
-                onPress: () => navigation.navigate('QuestPeso'),
+                onPress: () => navigation.navigate('AddBreakFast'),
+              },
+              {
+                icon: 'food',
+                label: 'Almoço',
+                onPress: () => navigation.navigate('AddLunch'),
+              },
+              {
+                icon: () => <MaterialIcons name="dinner-dining" size={24} color="#21005d" />,
+                label: 'Jantar',
+                onPress: () => navigation.navigate('AddDinner'),
               },
               {
                 icon: 'food-variant',
-                label: 'Jantar',
-                onPress: () => navigation.navigate('AddKcal') ,
-              },
-              {
-                icon: 'water',
-                label: 'Água',
-                onPress: () => navigation.navigate('AddWater'),
+                label: 'Café da manhã',
+                onPress: () => navigation.navigate('AddBreakFast') ,
               },
             ]}
             onStateChange={onStateChange}
@@ -63,7 +70,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'red',
+    backgroundColor: Colors.backgroundcolor_secondary,
   },
   title: {
     fontSize: 24,
