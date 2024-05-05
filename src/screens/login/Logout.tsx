@@ -56,12 +56,12 @@ export default function Logout({ navigation }: { navigation: any }) {
 
   useEffect(() => {
     getData();
-  }, );
+  },);
   return (
     <SafeAreaView style={styles.tela}>
       <Header />
       <View style={styles.conteudo}>{/* <Text style={{ fontSize: 25 }}>aqui{userName}</Text> */}
-      <AvatarImage/>
+        <AvatarImage />
         <Text style={{ fontSize: 25 }}>{email}</Text>
         <Text style={{ fontSize: 25 }}>Olá!</Text>
 
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     /* justifyContent: "center", */
     alignItems: "center",
   },
-  conteudo : {
+  conteudo: {
     flex: 1,
     backgroundColor: "F7F8F8",
     justifyContent: "center",
